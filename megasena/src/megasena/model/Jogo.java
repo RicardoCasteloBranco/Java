@@ -34,4 +34,11 @@ public class Jogo {
 	public void setData(Date data) {
 		this.data = data;
 	}
+	
+	public String toString() {
+		String texto = "Sorteio: "+this.sorteio+", Data: "+this.data+", números: "+this.numeros[0]+"-";
+		texto += this.numeros[1]+"-"+this.numeros[2]+"-"+this.numeros[3]+"-"+this.numeros[4]+"-";
+		texto += this.numeros[5];
+		return texto;
+	}
 }
