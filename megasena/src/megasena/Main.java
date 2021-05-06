@@ -9,7 +9,6 @@ public class Main {
 	public static void main(String[] args) throws IOException, ParseException {
 		JogoController controller = new JogoController();
 		controller.setArquivo("mega_sena.csv");
-		controller.lerArquivo();
-		controller.escreverArquivo();
+		controller.rodaJogos();
 	}
 }

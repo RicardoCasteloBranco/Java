@@ -6,6 +6,7 @@ public class Jogo {
 	private int[] numeros;
 	private int sorteio;
 	private Date data;
+	private boolean isLast;
 	
 	public Jogo() {
 		this.numeros = new int[6];
@@ -33,6 +34,26 @@ public class Jogo {
 
 	public void setData(Date data) {
 		this.data = data;
+	}
+	
+	
+	
+	public boolean isLast() {
+		return this.isLast;
+	}
+
+	public boolean hasNumero(int numero) {
+		this.isLast = false;
+		
+		for(int i = 0; i < this.numeros.length; i++) {
+			if(numero == this.numeros[i]) {
+				if(i == this.numeros.length-1) {
+					this.isLast = true;
+				}
+				return true;
+			}
+		}
+		return false;
 	}
 	
 	public String toString() {
