@@ -26,20 +26,23 @@ public class JogoController {
 		}
 	}
 	
-	public void rodaJogos() throws IOException, ParseException {
+	public void rodaJogos(int ciclos) throws IOException, ParseException {
 		this.lerArquivo();
 		this.processaLista();
 		this.selecionaJogo();
 		this.removeResto();
 		this.removeRepetido();
-		this.imprimeJogos(this.escolheNumeros(JogoController.QUADA,
-				JogoController.QUADB, JogoController.QUADC));
-		this.imprimeJogos(this.escolheNumeros(JogoController.QUADA,
-				JogoController.QUADB, JogoController.QUADD));
-		this.imprimeJogos(this.escolheNumeros(JogoController.QUADA,
-				JogoController.QUADC, JogoController.QUADD));
-		this.imprimeJogos(this.escolheNumeros(JogoController.QUADB,
-				JogoController.QUADC, JogoController.QUADD));
+		
+		for(int i = 0; i < ciclos; i++) {
+			this.imprimeJogos(this.escolheNumeros(JogoController.QUADA,
+					JogoController.QUADB, JogoController.QUADC));
+			this.imprimeJogos(this.escolheNumeros(JogoController.QUADA,
+					JogoController.QUADB, JogoController.QUADD));
+			this.imprimeJogos(this.escolheNumeros(JogoController.QUADA,
+					JogoController.QUADC, JogoController.QUADD));
+			this.imprimeJogos(this.escolheNumeros(JogoController.QUADB,
+					JogoController.QUADC, JogoController.QUADD));
+		}
 	}
 		
 	public String getArquivo() {
@@ -159,7 +162,41 @@ public class JogoController {
 		}
 		int [] numeros = {n1,n2,n3,n4,n5,n6};
 		
-		return numeros;
+		return this.quickSort(numeros, 0, numeros.length-1);
+	}
+	
+	
+	private int[] quickSort(int[] array, int esq, int dir) {
+		int pivo = esq;
+		int i, j;
+		int aux;
+		
+		i = esq;
+		j = dir;
+		pivo = array[(esq+dir)/2];
+		while(i <= j) {
+			while(array[i] < pivo) {
+				i++;
+			}
+			while(array[j] > pivo) {
+				j--;
+			}
+			if(i <= j) {
+				aux = array[i];
+				array[i] = array[j];
+				array[j] = aux;
+				i++;
+				j--;
+			}
+		}
+		
+		if(esq < j) {
+			this.quickSort(array, esq, j);
+		}
+		if(dir > i) {
+			this.quickSort(array, i, dir);
+		}
+		return array;
 	}
 	
 	
